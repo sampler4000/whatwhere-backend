@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <include file="db/changelog/liquibase.quartz.init.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/20231101010000_add_users_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/20231031210000_add_category_table.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/20231031220000_add_layer_table.xml" relativeToChangelogFile="false"/>
+
+
+
+</databaseChangeLog>

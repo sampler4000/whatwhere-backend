@@ -1,0 +1,18 @@
+---
+version: '3'
+services:
+  whatwhere-postgres:
+    image: kartoza/postgis:14
+    shm_size: 1g
+    environment:
+      - POSTGRES_USER=whatwhere
+      - POSTGRES_PASSWORD=whatwhere
+      - POSTGRES_DB=whatwhere
+    ports:
+      - 5432:5432
+    volumes:
+      - whatwhere-postgres-data:/var/lib/postgresql/data/
+  # docker volume create whatwhere-postgres-data
+volumes:
+  whatwhere-postgres-data:
+    external: true

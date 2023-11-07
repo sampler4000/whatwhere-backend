@@ -1,0 +1,120 @@
+logging:
+  level:
+    ROOT: INFO
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include: [ 'env', 'health', 'info', 'logfile', 'loggers' ]
+  endpoint:
+    health:
+      show-details: when-authorized
+      roles: 'ROLE_ADMIN'
+  info:
+    git:
+      mode: full
+  health:
+    mail:
+      enabled: false
+  metrics:
+    enable:
+      http: true
+      jvm: true
+      logback: true
+      process: true
+      system: true
+    distribution:
+      percentiles-histogram:
+        all: true
+      percentiles:
+        all: 0, 0.5, 0.75, 0.95, 0.99, 1.0
+    tags:
+      application: ${spring.application.name}
+
+spring:
+  application:
+    name: WhatWhereService
+  profiles:
+    include:
+      - default
+  main:
+    allow-bean-definition-overriding: true
+  jackson:
+    serialization:
+      write-durations-as-timestamps: false
+  jmx:
+    enabled: false
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: POSTGRESQL
+    open-in-view: false
+    properties:
+      hibernate.jdbc.time_zone: UTC
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: ${datasource.url}
+    username: ${datasource.username}
+    password: ${datasource.password}
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/master.xml
+    url: ${liquibase.url}
+    password: ${liquibase.password}
+    user: ${liquibase.username}
+    parameters:
+      app_user: ${datasource.username}
+      migrator_user: ${liquibase.username}
+
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never
+    overwrite-existing-jobs: false
+    properties:
+      org.quartz.jobStore.tablePrefix: qrtz.QRTZ_
+      org.quartz.scheduler.instanceName: WHATWHERE
+      org.quartz.scheduler.instanceId: AUTO
+      org.quartz.jobStore.driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+
+  # Security
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          jwk-set-uri: https://www.googleapis.com/service_accounts/v1/jwk/securetoken%40system.gserviceaccount.com
+
+
+# OpenAPI documentation
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /docs
+    doc-expansion: false
+  webjars:
+    prefix: swagger-resources
+  packages-to-scan:
+    - ee.spacexy.whatwhere.service.web.rest
+    - ee.spacexy.whatwhere.service.web.api
+  auto-tag-classes: false
+

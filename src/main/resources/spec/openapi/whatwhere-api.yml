@@ -1,0 +1,464 @@
+---
+openapi: 3.0.1
+info:
+  title: WhatWhere
+  version: 0.0.1
+servers:
+  - url: https://localhost:8080
+
+paths:
+  /api/account:
+    get:
+      tags:
+        - Account
+      operationId: getAccount
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+
+  /api/account/roles:
+    get:
+      tags:
+        - Account
+      operationId: getRoles
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+
+  /api/admin/layers:
+    get:
+      tags:
+        - Layer
+      operationId: getLayerDefinitions
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Layer'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+
+  /api/admin/layer:
+    post:
+      tags:
+        - Layer
+      operationId: createLayer
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Layer'
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Layer'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+
+  /api/admin/layer/{id}:
+    get:
+      tags:
+        - Layer
+      operationId: getLayer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Layer'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+    put:
+      tags:
+        - Layer
+      operationId: updateLayer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Layer'
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Layer'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+    delete:
+      tags:
+        - Layer
+      operationId: deleteLayer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+
+  /api/admin/categoires:
+    get:
+      tags:
+        - Category
+      operationId: getCategories
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+
+  /api/admin/category:
+    post:
+      tags:
+        - Category
+      operationId: createCategory
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Category'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+
+  /api/admin/category/{id}:
+    get:
+      tags:
+        - Category
+      operationId: getCategory
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Category'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+    put:
+      tags:
+        - Category
+      operationId: updateCategory
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Category'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+    delete:
+      tags:
+        - Category
+      operationId: deleteCategory
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+
+components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+
+  responses:
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '404':
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+
+  schemas:
+    Problem:
+      type: object
+      properties:
+        title:
+          type: string
+        status:
+          type: integer
+        details:
+          type: string
+        message:
+          type: string
+        fieldErrors:
+          type: array
+          items:
+            type: object
+            title: FieldError
+            properties:
+              objectName:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
+        globalErrors:
+          type: array
+          items:
+            type: object
+            title: GlobalError
+            properties:
+              objectName:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
+
+    User:
+      required:
+        - login
+      type: object
+      properties:
+        id:
+          type: string
+        login:
+          maxLength: 50
+          minLength: 1
+          type: string
+        firstName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        lastName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        occupation:
+          type: string
+        department:
+          type: string
+        email:
+          maxLength: 254
+          minLength: 5
+          type: string
+        activated:
+          type: boolean
+        langKey:
+          maxLength: 10
+          minLength: 2
+          type: string
+        imageUrl:
+          maxLength: 256
+          minLength: 0
+          type: string
+        authorities:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+
+    Role:
+      type: object
+      properties:
+        authority:
+          type: string
+
+    Layer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        title:
+          type: string
+        schema:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        url:
+          type: string
+        attribution:
+          type: string
+        legendUrl:
+          type: string
+        thumbnailUrl:
+          type: string
+        baseLayer:
+          type: boolean
+        params:
+          type: object
+        active:
+          type: boolean
+        deleted:
+          type: boolean
+        hidden:
+          type: boolean
+        order:
+          type: integer
+        planType:
+          type: string
+        category:
+          $ref: '#/components/schemas/Category'
+
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        active:
+          type: boolean
+        deleted:
+          type: boolean
+        hidden:
+          type: boolean
+        order:
+          type: integer
+        planType:
+          type: string

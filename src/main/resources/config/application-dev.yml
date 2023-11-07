@@ -1,0 +1,19 @@
+logging:
+  level:
+    ee.spacexy.whatwhere.service: DEBUG
+    org.springframework.security: TRACE
+
+logger:
+  appender: DEVELOPMENT
+
+datasource:
+  url: "jdbc:postgresql://localhost:5432/whatwhere"
+  username: whatwhere
+  password: whatwhere
+
+liquibase:
+  url: "jdbc:postgresql://localhost:5432/whatwhere"
+  username: whatwhere
+  password: whatwhere
+
+

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="Add users table" author="Vladimir">
+        <createTable tableName="users">
+            <column name="id" type="uuid" defaultValueComputed="gen_random_uuid()">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="login" type="VARCHAR(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="first_name" type="VARCHAR(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="last_name" type="VARCHAR(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="full_name" type="VARCHAR(256)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="email" type="VARCHAR(254)">
+                <constraints nullable="true" unique="true"/>
+            </column>
+            <column name="image_url" type="VARCHAR(256)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="activated" type="BOOLEAN" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lang_key" type="VARCHAR(10)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="authorities" type="VARCHAR(500)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>

@@ -1,0 +1,168 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.4'
+	id 'io.spring.dependency-management' version '1.1.3'
+	id 'org.openapi.generator' version '7.0.1'
+	id 'com.google.cloud.tools.jib' version '3.4.0'
+	id 'idea'
+}
+
+group = 'ee.spacexy.whatwhere'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '21'
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+		vendor = JvmVendorSpec.AZUL
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	openapiSpecs
+	querydsl
+}
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+ext {
+	springBootVersion = '3.1.4'
+	lombokVersion = '1.18.30'
+	querydslVersion = '5.0.0'
+	mapstructVersion = '1.5.5.Final'
+	springdocVersion = '2.1.0'
+	problemVersion = '0.29.1'
+	problemJacksonVersion = '0.27.1'
+	commonVersion = '0.0.9-SNAPSHOT'
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+	implementation 'org.hibernate.orm:hibernate-micrometer'
+
+	// JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'org.postgresql:postgresql'
+	implementation 'org.liquibase:liquibase-core'
+
+    implementation 'javax.persistence:javax.persistence-api:2.2'
+
+	implementation "com.querydsl:querydsl-jpa:${querydslVersion}:jakarta"
+	querydsl "com.querydsl:querydsl-apt:${querydslVersion}:jakarta"
+	annotationProcessor("com.querydsl:querydsl-apt:${querydslVersion}:jakarta", "jakarta.persistence:jakarta.persistence-api")
+
+	// OpenAPI
+	implementation 'io.swagger:swagger-annotations:1.6.11'
+	implementation 'io.swagger.core.v3:swagger-annotations:2.2.15'
+	implementation 'org.openapitools:jackson-databind-nullable:0.2.6'
+
+	// OpenAPI Doc
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-api:${springdocVersion}"
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springdocVersion}"
+
+	// Problem
+	implementation "org.zalando:problem-spring-web:${problemVersion}"
+	implementation "org.zalando:jackson-datatype-problem:${problemJacksonVersion}"
+
+	// MapStruct
+	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+	compileOnly "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
+	// Lombok
+	compileOnly "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
+	// Logging
+	implementation 'net.logstash.logback:logstash-logback-encoder:7.4'
+	implementation 'org.codehaus.janino:janino:3.1.10'
+
+	// Hazelcast
+	implementation 'com.hazelcast:hazelcast:5.3.2'
+	implementation 'com.hazelcast:hazelcast-spring:5.3.2'
+	implementation 'com.hazelcast:hazelcast-hibernate53:5.1.0'
+	implementation 'com.hazelcast:hazelcast-kubernetes:2.2.3'
+
+	implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
+
+	// Test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'org.testcontainers:postgresql'
+
+	// Development only
+	developmentOnly 'io.netty:netty-resolver-dns-native-macos:4.1.78.Final:osx-aarch_64'
+}
+
+tasks.named('test') {
+	testLogging {
+		events = ["passed", "failed", "skipped"]
+		showStandardStreams = true
+	}
+	useJUnitPlatform()
+	minHeapSize = "128m"
+	maxHeapSize = "4048m"
+	jvmArgs = ['-Xss4m']
+}
+
+tasks.register('generateServer', GenerateTask) {
+
+	generatorName.set("spring")
+	inputSpec.set("$rootDir/src/main/resources/spec/openapi/whatwhere-api.yml")
+	outputDir.set("$buildDir/generated/openapi")
+	apiPackage.set("ee.spacexy.whatwhere.service.web.api")
+	modelPackage.set("ee.spacexy.whatwhere.web.model")
+	modelNameSuffix.set("VM")
+	skipValidateSpec.set(false)
+	apiFilesConstrainedTo.set([""])
+	modelFilesConstrainedTo.set([""])
+	supportingFilesConstrainedTo.set(["ApiUtil.java"])
+	configOptions.set([
+			title                               : "WhatWhere Service API",
+			dateLibrary                         : "java8",
+			delegatePattern                     : "true",
+			useTags                             : "true",
+			serializableModel                   : "true",
+			useSpringBoot3                      : "true",
+			useSpringfox                        : "false",
+			useJakartaEe                        : "true",
+			generatedConstructorWithRequiredArgs: "false"
+	])
+	importMappings.set([
+			"Problem": "org.zalando.problem.Problem"
+	])
+	schemaMappings.set([
+			"Problem"   : "org.zalando.problem.Problem"
+	])
+}
+
+compileJava.dependsOn generateServer
+processResources.mustRunAfter generateServer
+
+sourceSets {
+	main {
+		java {
+			srcDirs "$buildDir/generated/openapi/src/main/java"
+		}
+	}
+}

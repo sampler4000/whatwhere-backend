@@ -1,0 +1,51 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="Add layer table" author="Vladimir">
+        <createTable tableName="layer">
+            <column name="id" type="uuid" defaultValueComputed="gen_random_uuid()">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(255)"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="schema" type="varchar(255)"/>
+            <column name="description" type="text"/>
+            <column name="type" type="varchar(255)"/>
+            <column name="url" type="text"/>
+            <column name="attribution" type="text"/>
+            <column name="legend_url" type="text"/>
+            <column name="thumbnail_url" type="text"/>
+            <column name="base_layer" type="boolean"/>
+            <column name="params" type="text"/>
+            <column name="active" type="boolean"/>
+            <column name="deleted" type="boolean"/>
+            <column name="hidden" type="boolean"/>
+            <column name="order" type="integer"/>
+            <column name="plan_type" type="varchar(255)"/>
+            <column name="category_id" type="uuid"/>
+
+            <column name="created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="layer" baseColumnNames="category_id"
+                                 referencedTableName="category" referencedColumnNames="id"
+                                 constraintName="fk_layer_category_id"/>
+
+
+    </changeSet>
+
+</databaseChangeLog>
