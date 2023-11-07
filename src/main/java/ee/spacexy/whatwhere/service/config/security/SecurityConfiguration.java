@@ -54,8 +54,8 @@ public class SecurityConfiguration {
         http.securityMatcher(
                 new NegatedRequestMatcher(new OrRequestMatcher(
                     antMatcher("/docs/**"),
-                    antMatcher("/swagger-ui/**"),
-                    antMatcher(HttpMethod.OPTIONS, "/**")
+                    antMatcher("/swagger-ui/**")
+                   // antMatcher(HttpMethod.OPTIONS, "/**")
                 )))
             .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
