@@ -16,7 +16,7 @@ import java.util.Optional;
 public class AuditingConfiguration {
     @Bean
     public AuditorAware<String> auditorProvider() {
-        return SecurityUtils::getCurrentUserLogin;
+        return () -> SecurityUtils.getCurrentUserLogin().orElseGet(() -> "system").describeConstable();
     }
 
     @Bean
