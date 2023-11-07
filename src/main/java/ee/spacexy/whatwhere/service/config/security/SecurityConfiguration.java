@@ -60,7 +60,6 @@ public class SecurityConfiguration {
             .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .csrf(AbstractHttpConfigurer::disable)
-            .cors(securityCorsConfigurer -> securityCorsConfigurer.configurationSource(corsConfigurationSource()))
             .exceptionHandling(exceptionHandling -> exceptionHandling.accessDeniedHandler(problemSupport).authenticationEntryPoint(problemSupport))
             .headers(headerSpec -> headerSpec
                 .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
@@ -93,16 +92,5 @@ public class SecurityConfiguration {
     @Bean
     public GrantedAuthoritiesMapper grantedAuthoritiesMapper() {
         return new CustomGrantedAuthoritiesMapper();
-    }
-
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("*"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
     }
 }
