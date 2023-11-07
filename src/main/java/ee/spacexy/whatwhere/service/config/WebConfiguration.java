@@ -21,8 +21,6 @@ public class WebConfiguration implements WebMvcConfigurer {
                 .allowedOrigins(applicationProperties.getCors().getAllowedOrigins())
                 .allowedMethods(applicationProperties.getCors().getAllowedMethods())
                 .allowedHeaders(applicationProperties.getCors().getAllowedHeaders())
-                .exposedHeaders(applicationProperties.getCors().getExposedHeaders())
-                .allowCredentials(applicationProperties.getCors().isAllowCredentials())
                 .maxAge(applicationProperties.getCors().getMaxAge());
     }
 }
