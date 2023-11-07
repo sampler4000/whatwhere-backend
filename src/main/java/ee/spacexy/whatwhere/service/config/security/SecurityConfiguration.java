@@ -68,6 +68,7 @@ public class SecurityConfiguration {
                 .permissionsPolicy(permissionsPolicySpec -> permissionsPolicySpec.policy("geolocation 'none'; midi 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; fullscreen 'self'; payment 'none'"))
             )
             .authorizeHttpRequests(authorization -> authorization
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers("/").permitAll()
                 .requestMatchers("/*.*").permitAll()
                 .requestMatchers("/docs").permitAll()
