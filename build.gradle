@@ -37,6 +37,10 @@ springBoot {
     mainClass.set('ee.spacexy.whatwhere.service.WhatWhereBackendApplication')
 }
 
+compileJava {
+    options.compilerArgs += "-Amapstruct.defaultComponentModel=spring"
+    options.compilerArgs += "-Amapstruct.unmappedTargetPolicy=IGNORE"
+}
 
 ext {
 	springBootVersion = '3.1.4'
@@ -163,6 +167,10 @@ tasks.register('generateServer', GenerateTask) {
 
 compileJava.dependsOn generateServer
 processResources.mustRunAfter generateServer
+
+jar {
+    enabled = false
+}
 
 sourceSets {
 	main {
