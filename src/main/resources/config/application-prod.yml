@@ -1,1 +1,20 @@
-
+application:
+  cors:
+    allowed-origins:
+      - https://whatwhere-admin.codo.ee/
+    allowed-methods:
+      - GET
+      - POST
+      - OPTIONS
+      - PUT
+      - DELETE
+    allowed-headers:
+      - Authorization
+      - Link
+      - X-Total-Count
+    exposed-headers:
+      - Authorization
+      - Link
+      - X-Total-Count
+    allow-credentials: true
+    max-age: 1800
