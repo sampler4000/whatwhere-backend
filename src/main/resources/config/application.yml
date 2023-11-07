@@ -118,3 +118,22 @@ springdoc:
     - ee.spacexy.whatwhere.service.web.api
   auto-tag-classes: false
 
+cors:
+  allowed-origins:
+    - https://whatwhere-admin.codo.ee/
+  allowed-methods:
+    - GET
+    - POST
+    - OPTIONS
+    - PUT
+    - DELETE
+  allowed-headers:
+    - Authorization
+    - Link
+    - X-Total-Count
+  exposed-headers:
+    - Authorization
+    - Link
+    - X-Total-Count
+  allow-credentials: true
+  max-age: 1800
