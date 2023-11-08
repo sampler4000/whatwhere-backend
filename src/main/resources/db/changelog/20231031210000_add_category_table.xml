@@ -33,4 +33,32 @@
 
     </changeSet>
 
+    <changeSet id="Add category initial data" author="Vladimir">
+        <sql>
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Haldusjaotus',now(),'system','550e8400-e29b-41d4-a716-446655440000',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Transport',now(),'system','f47ac10b-58cc-4372-a567-0e02b2c3d479',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Tähtsad asutused',now(),'system','8a79eaca-f8c5-4d7a-b8e7-6c7aecd2f1ff',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Kaubandus',now(),'system','5a3c5299-2e59-4f99-8385-6a4c89ecf6c1',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Finats',now(),'system','9a6de5a2-ddb2-43c5-b3c3-8696d6a77b42',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Religioon',now(),'system','2c4de342-38b7-4cda-9d8a-46386a9753e9',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Rajatised',now(),'system','e4da3b7f-bbce-4c25-9b39-8fbc54a43754',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Meelelehutus',now(),'system','77b72f0e-14af-4117-aa2e-8dde0bbf0bbe',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Turism',now(),'system','3d3c6bfa-6b77-4b0a-9a5e-52e3d677a0f8',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Sport',now(),'system','0ebb2140-0487-4b77-80c1-8b0974ae320c',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Elekter',now(),'system','5e1bf9e4-5f0b-4231-a14e-8eb6d3641cb3',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Gaas',now(),'system','6d3f92d9-3255-4b29-bc95-68aef0ddcfd9',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Kaugküte',now(),'system','2a2c4d66-0e65-43bc-9d2b-7585ac9f9f0b',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Vedelkütus',now(),'system','7d910cb5-f6ae-4c22-9d78-5e8e0c211579',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Kanalisatsioon',now(),'system','3e49766e-5e64-4bfa-9dd3-6edee8d33aad',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Side',now(),'system','1b645389-a8c0-4b2c-9a9f-0f5d05f33c85',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Loodus',now(),'system','63f36324-4a18-4f12-b6e4-cb7b52f3d7fa',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Mets',now(),'system','7c4ef8e1-2e7d-4561-9b44-d66b8c6bcf3c',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Vesi',now(),'system','87dcb2ee-6d4b-4b5d-8abf-c4c8f9a6f5c4',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Jaht',now(),'system','6a26b577-6ee6-4941-9f6f-d9b8f5e6ed6c',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Kalandus',now(),'system','5b9b2d4b-1ecc-4bd3-a372-df23e2b6881f',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Seire',now(),'system','1a2b3c4d-5e6f-7a8b-9c0d-edfeab123456',now(),'system');
+            INSERT INTO category(title,created,created_by,id,last_modified,last_modified_by) VALUES ('Planeeringud',now(),'system','c9d8e7f6-5b6a-4c3d-2e1f-0a1b2c3d4e5f',now(),'system');
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
