@@ -2,7 +2,6 @@ package ee.spacexy.whatwhere.service.config;
 
 import ee.spacexy.whatwhere.service.web.rest.errors.ExceptionTranslator;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

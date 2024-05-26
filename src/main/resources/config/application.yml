@@ -117,3 +117,6 @@ springdoc:
     - ee.spacexy.whatwhere.service.web.rest
     - ee.spacexy.whatwhere.service.web.api
   auto-tag-classes: false
+
+application:
+  firebase-configuration-file: ${FIREBASE_CONFIG}

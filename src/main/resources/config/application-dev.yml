@@ -25,5 +25,10 @@ application:
     exposed-headers: '*'
     allow-credentials: false
     max-age: 1800
-
+  firebase:
+    database-url: ${FIREBASE_DATABASE}
+    enable-strict-server-session: false
+    enable-check-session-revoked: false
+    enable-logout-everywhere: false
+    session-expiry-in-days: 5
 

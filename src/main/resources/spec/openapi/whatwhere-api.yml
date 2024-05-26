@@ -281,6 +281,40 @@ paths:
         '404':
           $ref: '#/components/responses/404'
 
+  /api/admin/firebase/update-user-layers/{userId}:
+    post:
+      tags:
+        - Firebase
+      operationId: updateUserLayers
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Layer'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+
 components:
   parameters:
     Id:

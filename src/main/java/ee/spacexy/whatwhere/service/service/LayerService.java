@@ -34,4 +34,12 @@ public class LayerService extends StandardCrudService<Layer, LayerDTO, UUID> {
         return mapper.toDto(repository.findAll());
     }
 
+
+    @Transactional
+
+    public List<LayerDTO> getLayersByCategoryId(UUID categoryId) {
+        return mapper.toDto(repository.findAllByCategoryId(categoryId));
+    }
+
+
 }

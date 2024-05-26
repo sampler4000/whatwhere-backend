@@ -3,6 +3,7 @@ package ee.spacexy.whatwhere.service.service;
 import ee.spacexy.whatwhere.service.domain.User;
 import ee.spacexy.whatwhere.service.repository.UserRepository;
 import ee.spacexy.whatwhere.service.security.AuthoritiesConstants;
+import ee.spacexy.whatwhere.service.service.dto.RoleDTO;
 import ee.spacexy.whatwhere.service.service.dto.UserDTO;
 import ee.spacexy.whatwhere.service.service.mapper.UserMapper;
 import ee.spacexy.whatwhere.service.utils.Constants;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 /**
@@ -114,5 +116,12 @@ public class UserService {
             .orElseThrow();
     }
 
+    public List<RoleDTO> getRoles(String login) {
+        User user = userRepository.findByLogin(login).orElseThrow();
+        return user.getAuthorities()
+            .stream()
+            .map(authority -> RoleDTO.builder().authority(authority).build())
+            .collect(Collectors.toList());
+    }
 
 }
